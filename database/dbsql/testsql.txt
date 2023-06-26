@@ -1,0 +1,27 @@
+SELECT * FROM pedidos
+
+INSERT INTO usuarios VALUES (4,'Luis', 'Valencia', 'Méndez', 55764, '5529406997', 3, 'geovalencia99@gmail.com', 'VaML991219!', false, 0)
+INSERT INTO repartidores VALUES (1, 'San Martín', now(), 0, 4)
+INSERT INTO proveedores VALUES (1, 'CocaCola', 'Ciudad de México', 1)
+INSERT INTO productos VALUES (1, 'Refresco', 'CocaCola', 30.00, 0.0, 16, 'Refresco de 3L sabor Cola', 1)
+INSERT INTO pedidos VALUES (1,1,1,1,0,false)
+
+SELECT * FROM pedidos
+SELECT u.nombre as cliente_nombre, u.ap_paterno as cliente_ap, u.ap_materno as cliente_am, 
+us.nombre as repartidor_nombre, us.ap_paterno as repartidor_ap, us.ap_materno as repartidor_am,
+productos.nombre as producto, pedidos.estatus as estatus, pedidos.pagado as pagado
+FROM pedidos 
+JOIN usuarios u
+ON u.id_usuario=pedidos.id_usuario
+JOIN repartidores
+ON repartidores.id_repartidor=pedidos.id_repartidor
+JOIN usuarios us
+ON us.id_usuario=repartidores.id_usuario
+JOIN productos
+ON productos.id_producto=pedidos.id_producto
+
+
+UPDATE repartidores SET hora_llegada = (SELECT current_timestamp)
+SELECT * FROM repartidores ORDER by hora_llegada DESC
+select extract(HOUR FROM hora_llegada) as mes from repartidores
+

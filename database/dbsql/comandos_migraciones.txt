@@ -1,0 +1,12 @@
+ php artisan migrate:fresh
+ php artisan migrate --path=database/migrations/2021_02_07_001630_create_usuarios_table.php
+ php artisan migrate --path=database/migrations/2021_02_07_002250_create_proveedors_table.php
+ php artisan migrate --path=database/migrations/2021_03_01_170846_create_almacenes.php
+ php artisan migrate --path=database/migrations/2021_02_07_002200_create_productos_table.php
+ php artisan migrate --path=database/migrations/2021_02_07_002409_create_repartidors_table.php
+ php artisan migrate --path=database/migrations/2021_03_02_041346_create_compras_table.php
+ php artisan migrate --path=database/migrations/2021_02_07_002636_create_pedidos_table.php
+ php artisan migrate --path=database/migrations/2021_02_07_002723_create_quejas_table.php
+ php artisan migrate --path=database/migrations/2021_02_14_051827_create_sessions_table.php
+ php artisan migrate --path=database/migrations/2021_04_03_184541_create_caja.php
+ 
