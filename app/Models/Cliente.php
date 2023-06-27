@@ -21,4 +21,7 @@ class Cliente extends Model
         'estatus'
     ];
 
+    public function antecedente(){
+        return $this->hasOne(Antecedente::class, 'id_antecedente', 'id_antecedente');
+    }
 }

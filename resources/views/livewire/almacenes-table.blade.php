@@ -3,7 +3,7 @@
         <div class="flex inline-block justify-between align-middle">
             <div class=" flex flex-wrap content-center ">
                 <h2 class="flex font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('ALMACENES / RUTA') }}
+                    {{ __('ALMACENES') }}
                 </h2>
             </div>
             <div class="flex justify-center">

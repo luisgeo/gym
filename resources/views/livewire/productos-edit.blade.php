@@ -153,8 +153,7 @@
 
                                                     <div class="col-span-12 sm:col-span-1">
                                                         <label for="precio"
-                                                            class="block text-sm font-medium text-gray-700">Precio
-                                                            Costo</label>
+                                                            class="block text-sm font-medium text-gray-700">Precio de adquisición</label>
                                                         <div class="flex mt-1">
                                                             <span
                                                                 class="inline-flex items-center p-2 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">$</span>
@@ -196,6 +195,7 @@
                                                             </script>
                                                         @enderror
                                                     </div>
+                                                    {{--
                                                     <div class="col-span-12 sm:col-span-1">
                                                         <div class="flex justify-between">
                                                             <label for="precio_medio_mayoreo"
@@ -278,7 +278,7 @@
                                                                 $('#loader').fadeOut();
                                                             </script>
                                                         @enderror
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-span-12 sm:col-span-1">
                                                         <label for="stock"
                                                             class="block text-sm font-medium text-gray-700">Stock en Almacén General</label>

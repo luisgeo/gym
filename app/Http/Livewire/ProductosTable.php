@@ -70,7 +70,9 @@ class ProductosTable extends Component
             ->distinct()
             ->groupBy([
                 'reparto.id_producto', 'productos.id_producto', 'productos.nombre',
-                'productos.stock', 'productos.precio', 'precio_unitario', 'descuento', 'descripcion',
+                'productos.stock', 'productos.precio', 
+                'precio_unitario', 
+                'descuento', 'descripcion',
                 'estatus', 'almacenes.nombre', 'imagen'
             ])
             ->orderBy('productos.nombre', 'asc');

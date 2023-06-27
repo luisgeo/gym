@@ -491,18 +491,6 @@
                                                                             Unitario:
                                                                             <b>${{ number_format(($producto->precio_unitario / 100) * $producto->precio + $producto->precio, 2) }}</b>
                                                                         </span>
-                                                                        <span class="text-blue-400 block">
-                                                                            Medio mayoreo:
-                                                                            <b>${{ number_format(($producto->precio_medio_mayoreo / 100) * $producto->precio + $producto->precio, 2) }}</b>
-                                                                        </span>
-                                                                        <span class="text-green-400 block">
-                                                                            Mayoreo:
-                                                                            <b>${{ number_format(($producto->precio_mayoreo / 100) * $producto->precio + $producto->precio, 2) }}</b>
-                                                                        </span>
-                                                                        <span class="text-yellow-400 block">
-                                                                            Súper Mayoreo:
-                                                                            <b>${{ number_format(($producto->precio_super_mayoreo / 100) * $producto->precio + $producto->precio, 2) }}</b>
-                                                                        </span>
                                                                     </td>
                                                                     <td
                                                                         class="pl-2 py-4 whitespace-nowrap text-sm text-gray-500">

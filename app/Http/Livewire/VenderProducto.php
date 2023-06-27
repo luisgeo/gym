@@ -126,7 +126,10 @@ class VenderProducto extends Component
         //     ->where('estatus', '!=', 0)
         //     ->count() > 0;
 
-        $isACode = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 'precio_unitario', 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
+        $isACode = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 
+        'precio_unitario', 
+        // 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 
+        'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
             ->join('almacenes', 'almacenes.id_almacen', '=', 'reparto.id_almacen')
             ->join('productos', 'productos.id_producto', '=', 'reparto.id_producto')
             ->where('reparto.id_almacen', '=', $this->caja->id_almacen)
@@ -135,7 +138,10 @@ class VenderProducto extends Component
             ->count() > 0;
 
         if ($isACode && $this->buscar != "") {
-            $productoEncontrado = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 'precio_unitario', 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
+            $productoEncontrado = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 
+            'precio_unitario', 
+            // 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 
+            'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
                 ->join('almacenes', 'almacenes.id_almacen', '=', 'reparto.id_almacen')
                 ->join('productos', 'productos.id_producto', '=', 'reparto.id_producto')
                 ->where('reparto.id_almacen', '=', $this->caja->id_almacen)
@@ -148,7 +154,10 @@ class VenderProducto extends Component
 
         $this->showCart = $this->buscar == "";
 
-        $productos = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 'precio_unitario', 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
+        $productos = Reparto::select('productos.id_producto', 'descripcion', 'estatus', 'productos.nombre as nombre', 'reparto.stock as stock', 'precio', 
+        'precio_unitario', 
+        // 'precio_medio_mayoreo', 'precio_mayoreo', 'precio_super_mayoreo', 
+        'descuento', 'modelo', 'codigo', 'almacenes.nombre as nombre_almacen')
             ->join('almacenes', 'almacenes.id_almacen', '=', 'reparto.id_almacen')
             ->join('productos', 'productos.id_producto', '=', 'reparto.id_producto')
             ->where('reparto.id_almacen', '=', $this->caja->id_almacen)
@@ -237,9 +246,9 @@ class VenderProducto extends Component
                     'id' => $this->producto->id_producto,
                     'precio_adquisicion' => $this->producto->precio,
                     'precio_unitario' => $this->producto->precio_unitario,
-                    'precio_medio_mayoreo' => $this->producto->precio_medio_mayoreo,
-                    'precio_mayoreo' => $this->producto->precio_mayoreo,
-                    'precio_super_mayoreo' => $this->producto->precio_super_mayoreo,
+                    // 'precio_medio_mayoreo' => $this->producto->precio_medio_mayoreo,
+                    // 'precio_mayoreo' => $this->producto->precio_mayoreo,
+                    // 'precio_super_mayoreo' => $this->producto->precio_super_mayoreo,
                     'descripcion' => $this->producto->descripcion,
                     'nombre' => $this->producto->nombre,
                     'codigo' => $this->producto->codigo,
@@ -268,9 +277,9 @@ class VenderProducto extends Component
                 'id' => $this->producto->id_producto,
                 'precio_adquisicion' => $this->producto->precio,
                 'precio_unitario' => $this->producto->precio_unitario,
-                'precio_medio_mayoreo' => $this->producto->precio_medio_mayoreo,
-                'precio_mayoreo' => $this->producto->precio_mayoreo,
-                'precio_super_mayoreo' => $this->producto->precio_super_mayoreo,
+                // 'precio_medio_mayoreo' => $this->producto->precio_medio_mayoreo,
+                // 'precio_mayoreo' => $this->producto->precio_mayoreo,
+                // 'precio_super_mayoreo' => $this->producto->precio_super_mayoreo,
                 'descripcion' => $this->producto->descripcion,
                 'nombre' => $this->producto->nombre,
                 'codigo' => $this->producto->codigo,
@@ -284,7 +293,9 @@ class VenderProducto extends Component
         }
 
         foreach ($carrito as $id_item => $item) {
-            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion'], $item['precio_unitario'], $item['precio_medio_mayoreo'], $item['precio_mayoreo'], $item['precio_super_mayoreo']);
+            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion']);
+        
+        // , $item['precio_unitario'], $item['precio_medio_mayoreo'], $item['precio_mayoreo'], $item['precio_super_mayoreo']
             $carrito[$id_item]['subtotal'] = $carrito[$id_item]['cantidad'] * ($carrito[$id_item]['precio'] - ($carrito[$id_item]['precio'] * ($carrito[$id_item]['descuento'] * 0.01)));
         }
 
@@ -311,21 +322,22 @@ class VenderProducto extends Component
         }
     }
 
-    public function getPrecio($precioAdquisicion, $precioUnitario, $precioMedioMayoreo, $precioMayoreo, $precioSuperMayoreo)
+    public function getPrecio($precioAdquisicion)
     {
+        return $precioAdquisicion;
         //Precios de mayoreo y super mayoreo
 
-        if ($this->totalProductos < getenv('MIN_MEDIO_MAYOREO'))
-            return (($precioUnitario / 100) * $precioAdquisicion) + $precioAdquisicion;
+        // if ($this->totalProductos < getenv('MIN_MEDIO_MAYOREO'))
+        //     return (($precioUnitario / 100) * $precioAdquisicion) + $precioAdquisicion;
 
-        if ($this->totalProductos >= getenv('MIN_MEDIO_MAYOREO') && $this->totalProductos < getenv('MIN_MAYOREO'))
-            return (($precioMedioMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
+        // if ($this->totalProductos >= getenv('MIN_MEDIO_MAYOREO') && $this->totalProductos < getenv('MIN_MAYOREO'))
+        //     return (($precioMedioMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
 
-        if ($this->totalProductos >= getenv('MIN_MAYOREO') && $this->totalProductos < getenv('MIN_SUPER_MAYOREO'))
-            return (($precioMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
+        // if ($this->totalProductos >= getenv('MIN_MAYOREO') && $this->totalProductos < getenv('MIN_SUPER_MAYOREO'))
+        //     return (($precioMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
 
-        if ($this->totalProductos >= getenv('MIN_SUPER_MAYOREO'))
-            return (($precioSuperMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
+        // if ($this->totalProductos >= getenv('MIN_SUPER_MAYOREO'))
+        //     return (($precioSuperMayoreo / 100) * $precioAdquisicion) + $precioAdquisicion;
     }
 
     public function quitar($id)
@@ -350,7 +362,9 @@ class VenderProducto extends Component
         $this->totalProductos -= 1;
 
         foreach ($carrito as $id_item => $item) {
-            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion'], $item['precio_unitario'], $item['precio_medio_mayoreo'], $item['precio_mayoreo'], $item['precio_super_mayoreo']);
+            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion']
+        );
+        //  $item['precio_unitario'], $item['precio_medio_mayoreo'], $item['precio_mayoreo'], $item['precio_super_mayoreo']
             $carrito[$id_item]['subtotal'] = $carrito[$id_item]['cantidad'] * ($carrito[$id_item]['precio'] - ($carrito[$id_item]['precio'] * ($carrito[$id_item]['descuento'] * 0.01)));
         }
 
@@ -382,7 +396,9 @@ class VenderProducto extends Component
         }
 
         foreach ($carrito as $id_item => $item) {
-            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion'], $item['precio_unitario'], $item['precio_medio_mayoreo'],  $item['precio_mayoreo'], $item['precio_super_mayoreo']);
+            $carrito[$id_item]['precio'] = $this->getPrecio($item['precio_adquisicion']
+        );
+        // $item['precio_unitario'], $item['precio_medio_mayoreo'],  $item['precio_mayoreo'], $item['precio_super_mayoreo']
             $carrito[$id_item]['subtotal'] = $carrito[$id_item]['cantidad'] * ($carrito[$id_item]['precio'] - ($carrito[$id_item]['precio'] * ($carrito[$id_item]['descuento'] * 0.01)));
         }
 
